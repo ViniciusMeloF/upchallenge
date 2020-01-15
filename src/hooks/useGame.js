@@ -3,7 +3,9 @@ import { useState } from "react";
 export const useGame = () => {
   const [game, setGame] = useState({
     started: false,
-    pause: false
+    pause: false,
+    count: false,
+    countdown: 4000
   });
 
   const upStarted = ({ started }) =>
@@ -18,5 +20,23 @@ export const useGame = () => {
       pause: prev.pause ? false : true
     }));
 
-  return [game, upStarted, upPause];
+  const upCount = ({ count }) =>
+    setGame(prev => ({
+      ...prev,
+      count: count
+    }));
+
+  const upCountdown = () =>
+    setGame(prev => ({
+      ...prev,
+      countdown: prev.countdown - 0.8
+    }));
+
+  const resetCountdown = () =>
+    setGame(prev => ({
+      ...prev,
+      countdown: 4000
+    }));
+
+  return [game, upStarted, upPause, upCount, upCountdown, resetCountdown];
 };
