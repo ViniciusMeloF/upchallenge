@@ -28,6 +28,18 @@ export const usePlayer = () => {
             ...prev,
             speed: prev.speed + 0.1
           }
+        : prev.turbo && prev.speed <= 220
+        ? {
+            ...prev,
+            speed: prev.speed + 0.2
+          }
+        : prev.turbo && prev.speed >= 220
+        ? {
+            ...prev,
+            turbo: false
+          }
+        : prev.speed <= 222 && prev.speed >= 140
+        ? { ...prev, speed: prev.speed - 0.1 }
         : prev
     );
 
@@ -36,18 +48,6 @@ export const usePlayer = () => {
       ...prev,
       turbo: turbo ? turbo : prev.turbo
     }));
-  // const upTurbo = ({ turbo }) =>
-  //   setPlayer(prev =>
-  //     turbo ? {
-  //       ...prev,
-  //       speed: prev.speed = 140 ? prev.speed + 0.1,
-  //     }
-  //       ? {
-  //           ...prev,
-  //           speed: prev.speed + 0.1
-  //         }
-  //       : prev
-  //   );
 
   return [player, upPlayer, upScore, upSpeed, upTurbo];
 };
