@@ -32,11 +32,5 @@ export const useGame = () => {
       countdown: prev.countdown - 0.8
     }));
 
-  const resetCountdown = () =>
-    setGame(prev => ({
-      ...prev,
-      countdown: 4000
-    }));
-
-  return [game, upStarted, upPause, upCount, upCountdown, resetCountdown];
+  return [game, upStarted, upPause, upCount, upCountdown];
 };

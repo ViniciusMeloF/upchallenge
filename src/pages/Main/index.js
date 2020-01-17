@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 
-import { Pista, Form, ContainerGame, Tittle } from "./style";
+import { ContainerGame, Container } from "./style";
 
-import Car from "../../components/Car/index";
-import Details from "../../components/Details/index";
+import Manual from "../../components/Manual/index";
+import Game from "../../components/Game/index";
+import Initial from "../../components/Initial/index";
 
 import { usePosition } from "../../hooks/usePosition";
 import { useGame } from "../../hooks/useGame";
@@ -11,14 +12,7 @@ import { usePlayer } from "../../hooks/usePlayer";
 
 export default function Main() {
   const [position, upPosition] = usePosition();
-  const [
-    game,
-    upStarted,
-    upPause,
-    upCount,
-    upCountdown,
-    resetCountdown
-  ] = useGame();
+  const [game, upStarted, upPause, upCount, upCountdown] = useGame();
   const [player, upPlayer, upScore, upSpeed, upTurbo] = usePlayer();
 
   //Verificar qual tecla foi pressionada
@@ -74,51 +68,18 @@ export default function Main() {
     };
   });
 
-  const startRace = async e => {
-    e.preventDefault();
-
-    const name = e.target[0].value;
-
-    upPlayer({ name });
-    upCount({ count: true });
-  };
-
   return (
     <>
-      <ContainerGame>
-        {game.started ? (
-          <>
-            {game.pause ? (
-              <>
-                <h1>PAUSE</h1>
-                <h2>Press 'ESC' to Unpause</h2>
-              </>
-            ) : (
-              <>
-                <Details player={player} />
-                <Pista />
-                <Car pos={position.pos} turbo={player.turbo} />
-              </>
-            )}
-          </>
-        ) : (
-          <>
-            {game.count ? (
-              <h1>
-                {game.countdown >= 0 ? parseInt(game.countdown / 1000) : "Run"}
-              </h1>
-            ) : (
-              <>
-                <Tittle>UpChallenge</Tittle>
-                <Form onSubmit={startRace}>
-                  <input type="text" placeholder="Digite seu nome" />
-                  <button type="submit">Iniciar Corrida</button>
-                </Form>
-              </>
-            )}
-          </>
-        )}
-      </ContainerGame>
+      <Container>
+        <ContainerGame>
+          {game.started ? (
+            <Game game={game} player={player} position={position} />
+          ) : (
+            <Initial game={game} fcUpPlayer={upPlayer} fcUpCount={upCount} />
+          )}
+        </ContainerGame>
+        <Manual />
+      </Container>
     </>
   );
 }

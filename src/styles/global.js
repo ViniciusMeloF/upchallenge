@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import img from "../assets/images/pista.gif";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -17,9 +16,6 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     background-color: #616161;
-    /*background-image: url(${img});
-    background-position:center; 
-    background-repeat:no-repeat; */
     font-family: 'Montserrat', sans-serif;
     width: 100%;
     height: 100vh;

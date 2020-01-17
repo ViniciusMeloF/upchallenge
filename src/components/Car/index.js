@@ -7,10 +7,8 @@ import CarMov from "./style";
 
 export default function Car({ pos, turbo }) {
   return (
-    <>
-      <CarMov position={{ pos }}>
-        <img src={turbo ? carImgT2 : carImg} alt="Fusca Azul" />
-      </CarMov>
-    </>
+    <CarMov position={{ pos }}>
+      <img src={turbo ? carImgT2 : carImg} alt="Fusca Azul" />
+    </CarMov>
   );
 }
