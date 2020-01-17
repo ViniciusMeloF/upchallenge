@@ -39,7 +39,7 @@ export default function Main() {
         arrowdown: () => upPosition({ pos: positions.center }),
         arrowright: () => upPosition({ pos: positions.right }),
         t: () => upTurbo({ turbo: true }),
-        escape: () => upPause({ pause: true })
+        escape: () => upPause()
       },
       null,
       event.key.toLowerCase()

@@ -14,7 +14,7 @@ export const useGame = () => {
       started: started ? started : prev.started
     }));
 
-  const upPause = ({ pause }) =>
+  const upPause = () =>
     setGame(prev => ({
       ...prev,
       pause: prev.pause ? false : true
